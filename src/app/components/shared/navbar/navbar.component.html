@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+  <div class="navbar-brand">XKCD</div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['comics']"> <span octicon="smiley"></span> Comics</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" (keyup.enter)="searchTasks(search.value)" #search>
+      <!-- button (click)="searchTasks(search.value)"  class="btn btn-outline-light my-2 my-sm-0" type="button">Search</button -->
+    </form>
+    <div class="my-2 my-lg-0">
+    <ul class="nav nav-pills">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle btn btn-outline-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{message}}</a>
+        <div class="dropdown-menu dropdown-menu-right">
+          <!-- button data-toggle="modal" data-target="#changePasswordModal" class="dropdown-item btn my-2 my-sm-0" type="button"> <span octicon="key"></span> Change Password</button -->
+          <button (click)="logOut()" class="dropdown-item btn my-2 my-sm-0" type="button"> <span octicon="sign-out"></span> Log out</button>
+        </div>
+      </li>
+    </ul>
+    </div>
+  </div>
+</nav>
