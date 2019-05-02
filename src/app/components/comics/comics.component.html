@@ -1,3 +1,143 @@
-<p>
-  comics works!
-</p>
+<div class="accordion fadeIn fast" id="accordionExample">
+
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-primary collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <span octicon="plus"></span> Comic
+        </button>
+      </h2>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+
+      <form #form="ngForm" id="createForm" *ngIf="!success">
+
+
+       <div class="form-row">
+          <div class="form-group col-md-6">
+            <button (click)="getRandomComic()" id="button" type="button" class="btn btn-outline-primary btn-block"><span octicon="zap"></span> Get Random Comic</button>
+          </div>
+          <div class="form-group col-md-6">
+            <button (click)="queryComic( comic.num ) " id="button" [disabled]="comic.num == null" type="button" class="btn btn-outline-primary btn-block"><span octicon="search"></span> Query Number</button>
+          </div>
+      </div>
+
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="num"><h5>Number</h5></label>
+          <input type="number" class="form-control" id="num" placeholder="Number" name="num" [(ngModel)]="comic.num" required #num="ngModel">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="img"><h5>Image</h5></label>
+          <input type="text" class="form-control" id="img" placeholder="Image" name="img" [(ngModel)]="comic.img" required #img="ngModel">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="safe_title"><h5>Safe Title</h5></label>
+          <input type="text" class="form-control" id="safe_title" placeholder="Safe Title" name="safe_title" [(ngModel)]="comic.safe_title" required #safe_title="ngModel">
+        </div>
+        
+        <div class="form-group col-md-6">
+          <label for="title"><h5>Title</h5></label>
+          <input type="text" class="form-control" id="title" placeholder="Title" name="title" [(ngModel)]="comic.title" required  #title="ngModel">
+        </div>
+      </div>
+
+
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label for="transcript"><h5>Transcript</h5></label>
+          <textarea type="textarea" class="form-control" id="transcript" placeholder="Transcript" name="transcript" [(ngModel)]="comic.transcript" required #transcript="ngModel"></textarea>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="day"><h5>Day</h5></label>
+          <input type="text" class="form-control" id="day" placeholder="Day" name="day" [(ngModel)]="comic.day" required #day="ngModel">
+        </div>
+        
+        <div class="form-group col-md-4">
+          <label for="month"><h5>Month</h5></label>
+          <input type="text" class="form-control" id="month" placeholder="Month" name="month" [(ngModel)]="comic.month" required  #month="ngModel">
+        </div>
+        
+        <div class="form-group col-md-4">
+          <label for="year"><h5>Year</h5></label>
+          <input type="text" class="form-control" id="year" placeholder="Year" name="year" [(ngModel)]="comic.year" required  #year="ngModel">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-8">
+          <label for="alt"><h5>Alt</h5></label>
+          <input type="text" class="form-control" id="alt" placeholder="Alt" name="alt" [(ngModel)]="comic.alt" required #alt="ngModel">
+        </div>
+        
+        <div class="form-group col-md-2">
+          <label for="link"><h5>Link</h5></label>
+          <input type="text" class="form-control" id="link" placeholder="Link" name="link" [(ngModel)]="comic.link" required  #link="ngModel">
+        </div>
+        
+        <div class="form-group col-md-2">
+          <label for="news"><h5>News</h5></label>
+          <input type="text" class="form-control" id="news" placeholder="News" name="news" [(ngModel)]="comic.news" required  #news="ngModel">
+        </div>
+      </div>
+
+       <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="button"><h5>Create Comic</h5></label><br>
+            <button (click)="createApplication(this.application)" id="button" [disabled]="!form.valid" type="button" class="btn btn-outline-success btn-block"><span octicon="plus"></span></button>
+          </div>
+      </div>
+          
+        </form>
+        
+        <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="success">
+          <strong>Application Creation Successful!</strong> {{createdApplication}} is a new application.
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="alertClosed()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="error">
+          <strong>Name already registered!</strong> Please try again.
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          <span octicon="list-unordered"></span> Comics
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body">
+
+  <div class="row">   
+    <div class="col-sm">
+      <div class="card-deck" >
+        <app-comic-item class="fadeIn fast" [comic]="comic" *ngFor="let comic of comics"></app-comic-item>
+      </div>
+    </div>
+  </div>
+
+      </div>
+    </div>
+  </div>
+  
+</div>

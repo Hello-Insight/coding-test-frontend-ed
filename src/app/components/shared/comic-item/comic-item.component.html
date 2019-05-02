@@ -1,3 +1,17 @@
-<p>
-  comic-item works!
-</p>
+<div class="card bg-light" >
+  <img src="{{comic.img}}" class="card-img-top" alt="{{comic.alt}}">
+  <div class="card-body">
+    <p class="card-text"><b>Number:</b> {{comic.num}}</p>
+    <p class="card-text"><b>Title:</b> {{comic.title}}</p>
+    <p class="card-text"><b>Image:</b> {{comic.img}}</p>
+  </div>
+  <div class="card-footer">
+    <div class="row">
+      <div class="col-sm">
+        <a [routerLink]="['/comic-detail', comic.id]" class="btn btn-outline-primary btn-block">
+          <span octicon="search"></span> Detail
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
