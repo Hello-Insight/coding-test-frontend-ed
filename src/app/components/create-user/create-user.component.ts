@@ -30,16 +30,18 @@ export class CreateUserComponent implements OnInit {
   }
 
   createUser ( user:User ) {
-/*
-    this.userService.createUser( user ).subscribe( user => {
 
-      if (user == undefined) {
+    this.userService.createUser( user ).subscribe( res => {
+
+      if (res == undefined) {
 
         this.error = true;
 
       } else {
 
-        this.createdUser = user.user_name;
+        console.log("res", res);
+
+        this.createdUser = user.email;
         this.success = true;
         this.error = false;
 
@@ -51,14 +53,10 @@ export class CreateUserComponent implements OnInit {
           password: null
         }
 
-        this.userService.readUsers().subscribe( users => {
-          this.users = users;
-        });
-
       }
 
     });
-*/    
+
   }
 
   validateEmail(event) {

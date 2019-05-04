@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 import { ErrorService } from './error.service';
 import { Comic } from '../interfaces/comic';
 
@@ -10,10 +11,12 @@ import { Comic } from '../interfaces/comic';
 })
 export class ComicService {
 
+  env = environment;
   lastURL:string = "https://xkcd.now.sh/";
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json',
+                               'Access-Control-Allow-Origin': '*'  })
   };
 
   constructor( private http: HttpClient,
@@ -27,12 +30,21 @@ export class ComicService {
     return this.http.get<Comic>(this.lastURL + num, this.httpOptions);
   }
 
-  public getMockComics() : Comic[] {
-  
-    var comics: Comic[] = [ { "id": "5a453cfd99b423000bc1d555", "month": "6", "num": 111, "link": "", "year": "2006", "news": "", "safe_title": "Firefox and Witchcraft - The Connection?", "transcript": "membership in wicca\ntotal firefox downloads\n[[positive slope graph]]\n[[Internet Explorer icon]]\nKeep the Faith\n[[Outline of a cross]]", "alt": "ThisadpaidforbythecounciltopromoteMicrosoftandChristianity. Remember, The Bible is Closed Source.", "img": "https://imgs.xkcd.com/comics/firefox_wicca.png", "title": "Firefox and Witchcraft - The Connection?", "day": "5" }, { "id": "5a453cfd99b423000bc1d556", "month": "12", "num": 1045, "link": "", "year": "2008", "news": "", "safe_title": "Web Browsers", "transcript": "this is just an example of Chrome and Firefox", "title": "Chrome and Firefox", "day": "23", "alt": "ThisadpaidforbythecounciltopromoteMicrosoftandChristianity. Remember, The Bible is Closed Source.", "img": "https://imgs.xkcd.com/comics/firefox_wicca.png" } ];
-  
-    return comics;
-  
+  public createComic( comic : Comic ) : Observable<Response> {
+
+    delete comic["id"];
+
+    console.log("comic", comic);
+
+    return this.http.post( this.env.api_url + '/comic/', comic, this.httpOptions ).pipe(
+      tap((res:Response) => console.log('created comic: ', res)),
+      catchError(this.error.handleError<Response>('createComic'))
+    );
+
+  }
+
+  public getAllComics() : Observable<Comic[]> {
+    return this.http.get( this.env.api_url + '/comic/', this.httpOptions );
   }
 
 

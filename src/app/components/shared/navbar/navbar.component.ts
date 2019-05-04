@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +11,8 @@ export class NavbarComponent implements OnInit {
 
   message : string = "";
 
-  constructor( private router:Router ) { }
+  constructor( private userService:UserService,
+               private router:Router ) { }
 
   ngOnInit() {
 
@@ -25,15 +27,25 @@ export class NavbarComponent implements OnInit {
       this.message = "Good night ";
     }
 
-//    this.message += sessionStorage.getItem("firstName");
+    this.message += sessionStorage.getItem("email");
     
     this.message += " ";
 
   }
-/*
-  logOut() {
-    sessionStorage.clear();
-    this.router.navigate(['']);
+
+  logout() {
+
+    this.userService.logout().subscribe( res => {
+  
+      console.log("res", res);
+      
+      sessionStorage.clear();
+
+      this.router.navigate(['']);
+
+    });
+    
+
   }
-*/
+
 }

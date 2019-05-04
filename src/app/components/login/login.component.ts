@@ -31,26 +31,23 @@ export class LoginComponent implements OnInit {
   }
   
     logInApp( form:NgForm ) {
-/*
-    this.loginService.login( form.value as User ).subscribe( user => {
+
+    this.userService.login( form.value as User ).subscribe( res => {
   
-      if (user == undefined) {
-        //$('#myToast').toast('show');
+      console.log("res", res);
+  
+      if (res == undefined) {
+
       } else {
       
-        sessionStorage.setItem("id", user.id);
-        sessionStorage.setItem("lastName", user.lastName);
-        sessionStorage.setItem("firstName", user.firstName);
-        sessionStorage.setItem("role", user.role);
-        sessionStorage.setItem("userName", user.userName);
-        sessionStorage.setItem("token", user.token);
+        sessionStorage.setItem("email", form.value.email);
 
         this.router.navigate(['/comics']);
 
       }
 
     });
-*/
+
   }
   
   validateEmail(event) {
