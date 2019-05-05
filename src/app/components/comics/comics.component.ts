@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-// import { Router } from '@angular/router';
 import { ComicService } from '../../services/comic.service';
 import { Comic } from '../../interfaces/comic';
 

@@ -5,6 +5,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { ErrorService } from './error.service';
 import { Comic } from '../interfaces/comic';
+import { Response } from '../interfaces/response';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,7 @@ export class ComicService {
   lastURL:string = "https://xkcd.now.sh/";
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json',
-                               'Access-Control-Allow-Origin': '*'  })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
   constructor( private http: HttpClient,
@@ -44,8 +44,11 @@ export class ComicService {
   }
 
   public getAllComics() : Observable<Comic[]> {
-    return this.http.get( this.env.api_url + '/comic/', this.httpOptions );
+    return this.http.get<Comic[]>( this.env.api_url + '/comic/', this.httpOptions );
   }
 
+  public deleteComic( id:string ) : Observable<Response> {
+    return this.http.delete<Response>( this.env.api_url + '/comic/' + id, this.httpOptions );
+  }
 
 }

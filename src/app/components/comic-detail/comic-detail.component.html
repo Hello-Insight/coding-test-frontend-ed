@@ -1,3 +1,53 @@
-<p>
-  comic-detail works!
-</p>
+<div class="jumbotron fadeIn fast">
+  <h1 class="display-4"><b>Comic #</b>{{ comic.num }}</h1>
+  <img src="{{comic.img}}" alt="{{comic.alt}}">
+  <hr class="my-4">
+  <h1 class="lead"><b>ID:</b> {{ comic.id }}</h1>
+  <hr class="my-4">
+  <p class="lead"><b>Title:</b> {{ comic.title }}</p>
+  <hr class="my-4">
+  <p class="lead"><b>Transcript:</b> {{ comic.transcript }}</p>
+  <hr class="my-4">
+  <p class="lead"><b>Alt:</b> {{ comic.alt }}</p>
+  <hr class="my-4">
+  <p class="lead"><b>Safe Title:</b> {{ comic.safe_title }}</p>
+  <hr class="my-4">
+  <p class="lead"><b>Date:</b> {{ date | date:'EEEE, d MMMM y' }}</p>
+  <hr class="my-4">
+  <div class="row">
+    <div  class="col-sm">
+      <button type="button" class="btn btn-outline-primary btn-block" data-toggle="collapse" data-target="#collapseDelete" role="button"> <span octicon="flame"></span> Delete Comic</button>
+    </div>
+    <div  class="col-sm">
+      <button type="button" class="btn btn-outline-primary btn-block" data-toggle="collapse" data-target="#collapseUpdate" role="button"> <span octicon="pencil"></span> Update Comic</button>
+    </div>
+  </div>
+  <br>
+  <div class="row collapse" id="collapseDelete">
+    <div class="card card-body bg-light">
+      <div class="row">
+        <div class="col-sm">
+          <button (click)="deleteComic()" type="button" class="btn btn-outline-danger btn-block" role="button">Confirm Delete Comic</button>
+        </div>
+        <div class="col-sm">
+          <button  type="button" class="btn btn-outline-warning btn-block" data-toggle="collapse" data-target="#collapseDelete" role="button">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row collapse" id="collapseUpdate">
+    <div class="card card-body bg-light">
+      <div class="row">
+
+        <!--div class="col-sm">
+          <button (click)="deleteComic()" type="button" class="btn btn-outline-danger btn-block" role="button">Confirm Delete Comic</button>
+        </div>
+        <div class="col-sm">
+          <button  type="button" class="btn btn-outline-warning btn-block" data-toggle="collapse" data-target="#collapseDelete" role="button">Cancel</button>
+        </div-->
+
+      </div>
+    </div>
+  </div>
+</div>
