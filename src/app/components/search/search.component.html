@@ -1,3 +1,8 @@
-<p>
-  search works!
-</p>
+<h1 class="fadeIn fast display-4"><b>Search results for:</b> {{ tag }}</h1>
+<div class="fadeIn fast card-deck">
+  
+  <app-comic-item class="fadeIn fast" [comic]="comic" *ngFor="let comic of comics"></app-comic-item>
+</div>
+<div class="fadeIn fast" *ngIf="comics.length == 0">
+  <h5>There are no results for this search term!</h5>
+</div>

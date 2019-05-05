@@ -28,7 +28,6 @@ export class ComicDetailComponent implements OnInit {
   
   success : boolean = false;
   error : boolean = false;
-  updatedComic : string = "";
   date = null;
 
   constructor( private router:Router,
@@ -39,23 +38,47 @@ export class ComicDetailComponent implements OnInit {
      this.activatedRoute.params.subscribe( params => { 
        this.comicService.getAllComics().subscribe( comics => {
          this.comic = comics.filter(x => x.id == params['id'])[0];
-         this.date = (new Date()).setFullYear(parseInt(this.comic.year),
-                                  parseInt(this.comic.month) - 1, 
-                                  parseInt(this.comic.day));
-         console.log(this.comic);
+         this.setDate();
       });
    });
   }
 
   alertClosed() {
     this.success = false;
-    this.updatedComic  = ""; 
   }
 
   deleteComic () {
     this.comicService.deleteComic( this.comic.id ).subscribe( res => {
       this.router.navigate(['/comics']);
     });
+  }
+
+  setDate() {
+    this.date = (new Date()).setFullYear(parseInt(this.comic.year),
+                parseInt(this.comic.month) - 1, 
+                parseInt(this.comic.day));
+  }
+
+  updateComic ( comic:Comic ) {
+
+    this.comicService.updateComic( comic ).subscribe( res => {
+
+      if (res == undefined) {
+
+        this.error = true;
+
+      } else {
+
+        console.log("res", res);
+
+        this.success = true;
+        this.error = false;
+        this.setDate();
+
+      }
+
+    });
+
   }
 
 }

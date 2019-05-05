@@ -45,7 +45,10 @@ export class NavbarComponent implements OnInit {
 
     });
     
+  }
 
+  searchComics( value : string ) {
+    this.router.navigate(['search', value]);
   }
 
 }

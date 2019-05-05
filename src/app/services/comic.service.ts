@@ -34,8 +34,6 @@ export class ComicService {
 
     delete comic["id"];
 
-    console.log("comic", comic);
-
     return this.http.post( this.env.api_url + '/comic/', comic, this.httpOptions ).pipe(
       tap((res:Response) => console.log('created comic: ', res)),
       catchError(this.error.handleError<Response>('createComic'))
@@ -49,6 +47,19 @@ export class ComicService {
 
   public deleteComic( id:string ) : Observable<Response> {
     return this.http.delete<Response>( this.env.api_url + '/comic/' + id, this.httpOptions );
+  }
+
+  public updateComic( comic : Comic ) : Observable<Response> {
+
+    return this.http.post( this.env.api_url + '/comic/', comic, this.httpOptions ).pipe(
+      tap((res:Response) => console.log('updated comic: ', res)),
+      catchError(this.error.handleError<Response>('updateComic'))
+    );
+
+  }
+
+  public searchComics( tag : string ) : Observable<Comic[]> {
+    return this.http.get<Comic[]>( this.env.api_url + '/comic/?tag=' + tag, this.httpOptions );
   }
 
 }

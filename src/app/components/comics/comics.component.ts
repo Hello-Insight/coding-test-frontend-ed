@@ -60,7 +60,7 @@ export class ComicsComponent implements OnInit {
       });
     });
   }
-  
+
   createComic ( comic:Comic ) {
 
     this.comicService.createComic( comic ).subscribe( res => {
@@ -101,7 +101,7 @@ export class ComicsComponent implements OnInit {
     });
 
   }
-  
+
   alertClosed() {
     this.success = false;
     this.createdComic  = ""; 
