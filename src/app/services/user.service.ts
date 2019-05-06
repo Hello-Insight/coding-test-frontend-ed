@@ -15,7 +15,8 @@ export class UserService {
   env = environment;
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json',
+                               'Authorization': 'JWT ' + sessionStorage.getItem("token") })
   };
 
   constructor( private http: HttpClient,
@@ -24,8 +25,6 @@ export class UserService {
   public createUser( user : User ) : Observable<Response> {
 
     delete user["id"];
-
-    console.log("user", user);
 
     return this.http.post( this.env.api_url + '/user', user, this.httpOptions ).pipe(
       tap((res:Response) => console.log('created user: ', res)),
@@ -40,12 +39,36 @@ export class UserService {
       catchError(this.error.handleError<Response>('login'))
     );
   }
-  
+
   public logout() : Observable<Response> {
     return this.http.post( this.env.api_url + '/user/logout', {}, this.httpOptions ).pipe(
       tap((res:Response) => console.log('log out: ', res)),
       catchError(this.error.handleError<Response>('logout'))
     );
+  }
+
+  public getId( email : string ) : Observable<Response> {
+    return this.http.get<Response>( this.env.api_url + '/user/login?email=' + email, this.httpOptions );
+  }
+
+  public updateUser( user : User ) : Observable<Response> {
+
+    return this.http.post( this.env.api_url + '/user', user, this.httpOptions ).pipe(
+      tap((res:Response) => console.log('updated user: ', res)),
+      catchError(this.error.handleError<Response>('updateUser'))
+    );
+
+  }
+  
+  public auth( user : User ) : Observable<any> {
+
+    let usr = { username: user.email, password: user.password };
+
+    return this.http.post( this.env.api_url + '/auth', usr, this.httpOptions ).pipe(
+      tap((res:any) => console.log('token: ', res)),
+      catchError(this.error.handleError<any>('auth'))
+    );
+
   }
 
 }

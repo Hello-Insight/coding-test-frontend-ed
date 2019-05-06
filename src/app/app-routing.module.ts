@@ -7,6 +7,7 @@ import { ComicsComponent } from './components/comics/comics.component';
 import { ComicDetailComponent } from './components/comic-detail/comic-detail.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
+import { HelpComponent } from './components/help/help.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'comic-detail/:id', component: ComicDetailComponent},
   {path: 'search/:tag', component: SearchComponent},
   {path: 'update-user', component: UpdateUserComponent},
+  {path: 'help', component: HelpComponent},
   {path: '**', pathMatch: 'full', redirectTo: 'comics'}
 ];
 

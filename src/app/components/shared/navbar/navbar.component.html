@@ -8,6 +8,9 @@
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['comics']"> <span octicon="smiley"></span> Comics</a>
       </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['help']"> <span octicon="unverified"></span> Help</a>
+      </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" (keyup.enter)="searchComics(search.value)" #search>
@@ -18,7 +21,7 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle btn btn-outline-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{message}}</a>
         <div class="dropdown-menu dropdown-menu-right">
-          <!-- button data-toggle="modal" data-target="#changePasswordModal" class="dropdown-item btn my-2 my-sm-0" type="button"> <span octicon="key"></span> Change Password</button -->
+          <button [routerLink]="['update-user']" class="dropdown-item btn my-2 my-sm-0" type="button"> <span octicon="pencil"></span> Update user</button>
           <button (click)="logout()" class="dropdown-item btn my-2 my-sm-0" type="button"> <span octicon="sign-out"></span> Log out</button>
         </div>
       </li>

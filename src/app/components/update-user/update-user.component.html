@@ -1,3 +1,62 @@
-<p>
-  update-user works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h1 class="display-4">Update User</h1>
+      <p>Warning: logs out in case of successful update.</p>
+    </div>
+  </div>
+
+  <form #form="ngForm" id="updateForm" *ngIf="!success">
+
+    <div class="form-row">
+
+      <div class="form-group col-md-6">
+        <label for="email"><h5>Email</h5></label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Email" [(ngModel)]="user.email" (keyup)="validateEmail($event)">
+      </div>
+        
+      <div class="form-group col-md-6">
+        <label for="password"><h5>Password</h5></label>
+        <input type="password" class="form-control" id="password" placeholder="Password" name="password" [(ngModel)]="user.password" required minlength="4" #password="ngModel">
+      </div>
+    </div>
+
+    <div class="form-row">
+
+        <div class="form-group col-md-6">
+          <label for="firstName"><h5>First Name</h5></label>
+          <input type="text" class="form-control" id="firstName" placeholder="First Name" name="first_name" [(ngModel)]="user.first_name" required minlength="4" #first_name="ngModel">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="lastName"><h5>Last Name</h5></label>
+          <input type="text" class="form-control" id="lastName" placeholder="Last Name" name="last_name" [(ngModel)]="user.last_name" required minlength="4" #last_name="ngModel">
+        </div>
+
+    </div>
+          
+     <div class="form-row">
+        <div class="form-group col-md-6">
+          <a [routerLink]="['/comics']" id="buttonBack" class="btn btn-outline-danger btn-block" data-dismiss="modal"><span octicon="x"></span> Go Back</a>
+        </div>
+        <div class="form-group col-md-6">
+          <button (click)="updateUser(this.user)" id="button" [disabled]="!form.valid || !validEmail" type="button" class="btn btn-outline-success btn-block" data-dismiss="modal"><span octicon="plus"></span> Create User</button>
+        </div>
+     </div>
+
+  </form>
+
+  <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="success">
+    <strong>User Update Successful!</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="alertClosed()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="error">
+    <strong>Email already registered!</strong> Please try again.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+</div>

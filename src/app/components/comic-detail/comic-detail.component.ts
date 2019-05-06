@@ -49,6 +49,7 @@ export class ComicDetailComponent implements OnInit {
 
   deleteComic () {
     this.comicService.deleteComic( this.comic.id ).subscribe( res => {
+      console.log(res);
       this.router.navigate(['/comics']);
     });
   }

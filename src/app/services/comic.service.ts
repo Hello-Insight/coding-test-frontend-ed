@@ -16,7 +16,8 @@ export class ComicService {
   lastURL:string = "https://xkcd.now.sh/";
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json',
+                               'Authorization': 'JWT ' + sessionStorage.getItem("token") })
   };
 
   constructor( private http: HttpClient,

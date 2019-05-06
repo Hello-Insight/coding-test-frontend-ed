@@ -16,6 +16,7 @@ import { ComicItemComponent } from './components/shared/comic-item/comic-item.co
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
 import { OcticonDirective } from './directives/octicon.directive';
+import { HelpComponent } from './components/help/help.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { OcticonDirective } from './directives/octicon.directive';
     ComicItemComponent,
     CreateUserComponent,
     UpdateUserComponent,
-    OcticonDirective
+    OcticonDirective,
+    HelpComponent
   ],
   imports: [
     BrowserModule,

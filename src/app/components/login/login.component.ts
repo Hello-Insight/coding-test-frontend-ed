@@ -30,24 +30,21 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
   
-    logInApp( form:NgForm ) {
-
+  logInApp( form:NgForm ) {
     this.userService.login( form.value as User ).subscribe( res => {
-  
-      console.log("res", res);
-  
-      if (res == undefined) {
-
+      if (res.status == "401") {
+        this.error = true;
       } else {
       
+        this.userService.auth( form.value as User ).subscribe( res2 => {
+          console.log(res2.access_token);
+          sessionStorage.setItem("token", res2.access_token);
+        });
+      
         sessionStorage.setItem("email", form.value.email);
-
         this.router.navigate(['/comics']);
-
       }
-
     });
-
   }
   
   validateEmail(event) {
@@ -61,6 +58,10 @@ export class LoginComponent implements OnInit {
     } else {
       this.validEmail = true;
     }
+  }
+  
+  alertClosed() {
+    this.error = false;
   }
 
 }
