@@ -9,14 +9,16 @@ import { CreateUserComponent } from './components/create-user/create-user.compon
 import { UpdateUserComponent } from './components/update-user/update-user.component';
 import { HelpComponent } from './components/help/help.component';
 
+import { AuthGuard } from './guards/auth.guard';
+
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'create-user', component: CreateUserComponent},
-  {path: 'comics', component: ComicsComponent},
-  {path: 'comic-detail/:id', component: ComicDetailComponent},
-  {path: 'search/:tag', component: SearchComponent},
-  {path: 'update-user', component: UpdateUserComponent},
-  {path: 'help', component: HelpComponent},
+  {path: 'comics', component: ComicsComponent, canActivate: [AuthGuard]},
+  {path: 'comic-detail/:id', component: ComicDetailComponent, canActivate: [AuthGuard]},
+  {path: 'search/:tag', component: SearchComponent, canActivate: [AuthGuard]},
+  {path: 'update-user', component: UpdateUserComponent, canActivate: [AuthGuard]},
+  {path: 'help', component: HelpComponent, canActivate: [AuthGuard]},
   {path: '**', pathMatch: 'full', redirectTo: 'comics'}
 ];
 

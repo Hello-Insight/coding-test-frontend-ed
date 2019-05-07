@@ -35,14 +35,12 @@ export class LoginComponent implements OnInit {
       if (res.status == "401") {
         this.error = true;
       } else {
-      
         this.userService.auth( form.value as User ).subscribe( res2 => {
           console.log(res2.access_token);
           sessionStorage.setItem("token", res2.access_token);
+          sessionStorage.setItem("email", form.value.email);
+          this.router.navigate(['/comics']);
         });
-      
-        sessionStorage.setItem("email", form.value.email);
-        this.router.navigate(['/comics']);
       }
     });
   }

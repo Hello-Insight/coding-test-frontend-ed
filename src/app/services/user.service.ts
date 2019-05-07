@@ -16,21 +16,18 @@ export class UserService {
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json',
-                               'Authorization': 'JWT ' + sessionStorage.getItem("token") })
+                               'Authorization': 'Bearer ' + sessionStorage.getItem("token") })
   };
 
   constructor( private http: HttpClient,
                private error: ErrorService ) { }
 
   public createUser( user : User ) : Observable<Response> {
-
     delete user["id"];
-
     return this.http.post( this.env.api_url + '/user', user, this.httpOptions ).pipe(
       tap((res:Response) => console.log('created user: ', res)),
       catchError(this.error.handleError<Response>('createUser'))
     );
-
   }
 
   public login( user : User ) : Observable<Response> {
@@ -47,28 +44,19 @@ export class UserService {
     );
   }
 
-  public getId( email : string ) : Observable<Response> {
-    return this.http.get<Response>( this.env.api_url + '/user/login?email=' + email, this.httpOptions );
-  }
-
   public updateUser( user : User ) : Observable<Response> {
-
     return this.http.post( this.env.api_url + '/user', user, this.httpOptions ).pipe(
       tap((res:Response) => console.log('updated user: ', res)),
       catchError(this.error.handleError<Response>('updateUser'))
     );
-
   }
   
   public auth( user : User ) : Observable<any> {
-
     let usr = { username: user.email, password: user.password };
-
     return this.http.post( this.env.api_url + '/auth', usr, this.httpOptions ).pipe(
       tap((res:any) => console.log('token: ', res)),
       catchError(this.error.handleError<any>('auth'))
     );
-
   }
 
 }

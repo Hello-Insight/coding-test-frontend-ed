@@ -2,11 +2,11 @@
   <div class="row">
     <div class="col-sm">
       <h1 class="display-4">Update User</h1>
-      <p>Warning: logs out in case of successful update.</p>
+      <p><b>Warning:</b> logs out in case of successful update.</p>
     </div>
   </div>
 
-  <form #form="ngForm" id="updateForm" *ngIf="!success">
+  <form #form="ngForm" id="updateForm" *ngIf="!success" autocomplete="off">
 
     <div class="form-row">
 
@@ -39,7 +39,7 @@
           <a [routerLink]="['/comics']" id="buttonBack" class="btn btn-outline-danger btn-block" data-dismiss="modal"><span octicon="x"></span> Go Back</a>
         </div>
         <div class="form-group col-md-6">
-          <button (click)="updateUser(this.user)" id="button" [disabled]="!form.valid || !validEmail" type="button" class="btn btn-outline-success btn-block" data-dismiss="modal"><span octicon="plus"></span> Create User</button>
+          <button (click)="updateUser(this.user)" id="button" [disabled]="!form.valid || !validEmail" type="button" class="btn btn-outline-success btn-block" data-dismiss="modal"><span octicon="plus"></span> Update User</button>
         </div>
      </div>
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
 import { User } from '../../interfaces/user';
 
 import * as validate from 'validate.js';
@@ -25,12 +26,11 @@ export class UpdateUserComponent implements OnInit {
   error : boolean = false;
 
   constructor( private userService:UserService,
-               private router:Router ) { }
+               private router:Router,
+               private authService:AuthService ) { }
 
   ngOnInit() {
-    this.userService.getId( sessionStorage.getItem("email") ).subscribe( res => {
-      this.user.id = res.id;
-    });
+    this.user.id = this.authService.identity();
   }
 
   updateUser( user:User ) {

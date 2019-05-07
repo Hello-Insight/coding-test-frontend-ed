@@ -17,7 +17,7 @@ export class ComicService {
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json',
-                               'Authorization': 'JWT ' + sessionStorage.getItem("token") })
+                               'Authorization': 'Bearer ' + sessionStorage.getItem("token") })
   };
 
   constructor( private http: HttpClient,
